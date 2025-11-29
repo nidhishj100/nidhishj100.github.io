@@ -13,8 +13,9 @@
     /* --- 1. PREMIUM VARIABLES --- */
     :root {
       --bg: #030304;
-      --card-bg: #0a0a0c;
-      --card-border: rgba(255, 255, 255, 0.06);
+      /* More transparent card bg for glass effect */
+      --card-bg: rgba(10, 10, 12, 0.65); 
+      --card-border: rgba(255, 255, 255, 0.1);
       
       --text-main: #f1f5f9;
       --text-muted: #94a3b8;
@@ -31,18 +32,30 @@
       --radius-lg: 24px;
     }
 
-    /* --- 2. GLOBAL RESET --- */
+    /* --- 2. GLOBAL RESET & BACKGROUND --- */
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Manrope', sans-serif; scroll-behavior: smooth; }
     
     body {
       background-color: var(--bg);
       color: var(--text-main);
       overflow-x: hidden;
-      background-image: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.08), transparent 40%);
+      
+      /* --- NEW: ULTRA-PREMIUM BACKGROUND STACK --- */
+      background-image: 
+        /* Layer 1: Dark Gradient Overlay (Keeps text readable) */
+        linear-gradient(to bottom, rgba(3, 3, 5, 0.85), rgba(3, 3, 5, 0.98)),
+        /* Layer 2: Subtle Grid Pattern */
+        radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        /* Layer 3: High-Quality Tech/Global Image */
+        url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop');
+      
+      background-size: cover, 40px 40px, cover;
+      background-position: center;
+      background-attachment: fixed; /* Parallax effect */
     }
 
     /* --- 3. UTILITIES --- */
-    .container { max-width: 1080px; margin: auto; padding: 0 24px; }
+    .container { max-width: 1080px; margin: auto; padding: 0 24px; position: relative; z-index: 2; }
     section { margin-bottom: 100px; }
     
     h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.02em; }
@@ -55,57 +68,82 @@
     .section-title { font-size: 1.75rem; color: white; display: flex; align-items: center; gap: 12px; }
     .section-subtitle { color: var(--text-muted); font-size: 0.9rem; }
 
-    /* --- 4. HERO SECTION (Compact & Punchy) --- */
+    /* --- 4. HERO SECTION --- */
     .hero {
-      padding: 110px 0 60px; text-align: center; position: relative;
+      padding: 120px 0 60px; text-align: center; position: relative;
     }
     
     .profile-ring {
-      width: 130px; height: 130px; margin: 0 auto 20px;
+      width: 140px; height: 140px; margin: 0 auto 20px;
       padding: 4px; border-radius: 50%;
       background: linear-gradient(135deg, var(--primary), var(--secondary));
       position: relative;
+      box-shadow: 0 0 30px rgba(99, 102, 241, 0.4); /* Glowing effect */
     }
     .profile-img {
       width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
       border: 4px solid var(--bg); background: #222;
     }
     
-    .hero h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 15px; }
+    .hero h1 { 
+      font-size: 3.5rem; line-height: 1.1; margin-bottom: 15px; 
+      text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
     .hero-role { 
       font-size: 1.1rem; color: var(--accent); font-weight: 600;
       background: rgba(6, 182, 212, 0.1); padding: 5px 15px; border-radius: 50px;
-      display: inline-block; margin-bottom: 20px; border: 1px solid rgba(6, 182, 212, 0.2);
+      display: inline-block; margin-bottom: 20px; 
+      border: 1px solid rgba(6, 182, 212, 0.2);
+      backdrop-filter: blur(5px);
     }
     
-    .action-buttons { display: flex; gap: 15px; justify-content: center; margin-top: 25px; }
+    .action-buttons { display: flex; gap: 15px; justify-content: center; margin-top: 30px; }
+    
+    /* CV Button Pulse Animation */
     .btn {
-      padding: 12px 28px; border-radius: 50px; font-weight: 600; text-decoration: none;
-      transition: 0.3s; display: inline-flex; align-items: center; gap: 8px; font-size: 0.95rem;
+      padding: 14px 32px; border-radius: 50px; font-weight: 600; text-decoration: none;
+      transition: 0.3s; display: inline-flex; align-items: center; gap: 8px; font-size: 1rem;
     }
-    .btn-primary { background: white; color: black; }
-    .btn-outline { border: 1px solid var(--card-border); color: white; background: rgba(255,255,255,0.02); }
-    .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+    .btn-cv { 
+      background: white; color: black; 
+      box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+      animation: pulse-white 2s infinite;
+    }
+    @keyframes pulse-white {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+    }
+    
+    .btn-outline { 
+      border: 1px solid var(--card-border); color: white; 
+      background: rgba(255,255,255,0.05); backdrop-filter: blur(10px);
+    }
+    .btn:hover { transform: translateY(-3px); }
 
     /* --- 5. TECH ARSENAL (Scrolling Ticker) --- */
     .tech-strip {
-      background: var(--card-bg); border-top: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border);
+      background: rgba(10, 10, 12, 0.5); 
+      border-top: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border);
       padding: 20px 0; margin-bottom: 80px; overflow: hidden; white-space: nowrap;
+      backdrop-filter: blur(5px);
     }
-    .tech-track { display: inline-block; animation: scroll 20s linear infinite; }
+    .tech-track { display: inline-block; animation: scroll 25s linear infinite; }
     .tech-item {
       display: inline-flex; align-items: center; gap: 8px; margin: 0 30px;
       color: var(--text-muted); font-weight: 600; font-size: 1.1rem;
     }
     @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-    /* --- 6. PROJECTS (Detailed Cards) --- */
+    /* --- 6. PROJECTS (Glass Cards) --- */
     .project-card {
-      background: var(--card-bg); border: 1px solid var(--card-border);
+      background: var(--card-bg); 
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
       border-radius: var(--radius-lg); padding: 30px; position: relative;
       transition: 0.3s; overflow: hidden; display: flex; flex-direction: column; height: 100%;
     }
-    .project-card:hover { border-color: var(--primary); transform: translateY(-5px); }
+    .project-card:hover { border-color: var(--primary); transform: translateY(-5px); background: rgba(20,20,30,0.8); }
     .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
     
     .tag-container { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 15px; }
@@ -120,29 +158,30 @@
       margin-bottom: 20px;
     }
 
-    /* --- 7. CERTIFICATIONS (Clean List) --- */
+    /* --- 7. CERTIFICATIONS --- */
     .cert-item {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 20px; background: var(--card-bg); border: 1px solid var(--card-border);
+      padding: 20px; 
+      background: var(--card-bg); backdrop-filter: blur(10px);
+      border: 1px solid var(--card-border);
       border-radius: var(--radius-md); margin-bottom: 15px; transition: 0.3s;
     }
-    .cert-item:hover { background: rgba(255,255,255,0.03); }
+    .cert-item:hover { background: rgba(255,255,255,0.1); }
     .cert-left { display: flex; align-items: center; gap: 15px; }
     .cert-icon { font-size: 1.5rem; color: var(--success); }
     
-    /* Special NPTEL Style (Normal but Professional) */
     .cert-item.nptel { border-left: 3px solid var(--gold); }
     .cert-item.nptel .cert-icon { color: var(--gold); }
 
-    /* --- 8. AWARDS (Trophy Case - NEW) --- */
+    /* --- 8. AWARDS (Trophy Case) --- */
     .awards-grid {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px;
     }
     .award-card {
       text-align: center; padding: 30px 20px;
-      background: linear-gradient(180deg, var(--card-bg) 0%, rgba(20,20,20,0) 100%);
+      background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(20,20,20,0) 100%);
       border: 1px solid var(--card-border); border-radius: var(--radius-lg);
-      transition: 0.3s;
+      transition: 0.3s; backdrop-filter: blur(5px);
     }
     .award-card:hover { border-color: var(--gold); background: rgba(245, 158, 11, 0.05); }
     .award-icon {
@@ -151,42 +190,44 @@
     }
     .award-date { font-size: 0.8rem; color: var(--text-muted); margin-top: 5px; display: block; }
 
-    /* --- 9. EXTRACURRICULAR & LEADERSHIP (Bento Grid - NEW) --- */
+    /* --- 9. BENTO GRID --- */
     .bento-grid {
       display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; grid-auto-rows: minmax(140px, auto);
     }
     .bento-item {
-      background: var(--card-bg); border: 1px solid var(--card-border);
+      background: var(--card-bg); backdrop-filter: blur(10px);
+      border: 1px solid var(--card-border);
       border-radius: var(--radius-lg); padding: 25px; display: flex; flex-direction: column; justify-content: center;
     }
     
-    /* Bento Spans */
     .span-4 { grid-column: span 4; }
     .span-6 { grid-column: span 6; }
     .span-12 { grid-column: span 12; }
-    
-    @media (max-width: 768px) {
-      .span-4, .span-6 { grid-column: span 12; }
-    }
+    @media (max-width: 768px) { .span-4, .span-6 { grid-column: span 12; } }
 
     .role-badge {
       font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
       color: var(--secondary); margin-bottom: 8px;
     }
 
-    /* --- 10. REFERENCES (Mentors) --- */
+    /* --- 10. REFERENCES --- */
     .mentor-row {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;
     }
     .mentor-card {
       display: flex; align-items: center; gap: 15px;
       padding: 20px; border-radius: var(--radius-md);
-      background: rgba(255,255,255,0.02); border: 1px solid var(--card-border);
+      background: rgba(255,255,255,0.03); backdrop-filter: blur(10px);
+      border: 1px solid var(--card-border);
     }
     .mentor-img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; }
 
     /* --- FOOTER --- */
-    footer { border-top: 1px solid var(--card-border); padding: 50px 0; text-align: center; margin-top: 100px; }
+    footer { 
+      border-top: 1px solid var(--card-border); padding: 50px 0; 
+      text-align: center; margin-top: 100px; 
+      background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
+    }
     .social-links { display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; }
     .social-icon { color: var(--text-muted); font-size: 1.2rem; transition: 0.2s; }
     .social-icon:hover { color: white; }
@@ -208,8 +249,9 @@
       </p>
       
       <div class="action-buttons">
-        <!-- Add your resume PDF link here -->
-        <a href="#" class="btn btn-primary"><i class="fas fa-file-download"></i> Download CV</a>
+        <!-- LINK YOUR RESUME HERE. Example: href="resume.pdf" -->
+        <a href="resume.pdf" class="btn btn-cv"><i class="fas fa-file-download"></i> Download CV</a>
+        
         <a href="mailto:nidhishj100@gmail.com" class="btn btn-outline"><i class="fas fa-envelope"></i> Hire Me</a>
       </div>
     </div>
@@ -422,7 +464,7 @@
       </div>
     </section>
 
-    <!-- SECTION 4: REFERENCES (Separate) -->
+    <!-- SECTION 4: REFERENCES -->
     <section>
       <div class="section-head">
         <h2 class="section-title"><i class="fas fa-users"></i> Academic References</h2>
