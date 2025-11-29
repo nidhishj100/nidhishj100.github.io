@@ -10,49 +10,57 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
-    /* --- 1. PREMIUM VARIABLES --- */
+    /* --- 1. CORE SETTINGS --- */
     :root {
-      --bg: #030304;
-      /* More transparent card bg for glass effect */
-      --card-bg: rgba(10, 10, 12, 0.65); 
-      --card-border: rgba(255, 255, 255, 0.1);
-      
-      --text-main: #f1f5f9;
-      --text-muted: #94a3b8;
-      
-      /* Accent Colors - Sophisticated Palette */
       --primary: #6366f1; /* Indigo */
       --secondary: #a855f7; /* Purple */
       --accent: #06b6d4; /* Cyan */
-      --success: #10b981; /* Emerald */
       --gold: #f59e0b;   /* Amber */
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
       
-      --radius-sm: 8px;
+      --card-bg: rgba(20, 20, 25, 0.6); /* Transparent Glass */
+      --card-border: rgba(255, 255, 255, 0.1);
+      
       --radius-md: 16px;
       --radius-lg: 24px;
     }
 
-    /* --- 2. GLOBAL RESET & BACKGROUND --- */
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Manrope', sans-serif; scroll-behavior: smooth; }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Manrope', sans-serif; }
     
     body {
-      background-color: var(--bg);
+      background-color: #030304;
       color: var(--text-main);
       overflow-x: hidden;
-      
-      /* --- NEW: ULTRA-PREMIUM BACKGROUND STACK --- */
-      background-image: 
-        /* Layer 1: Dark Gradient Overlay (Keeps text readable) */
-        linear-gradient(to bottom, rgba(3, 3, 5, 0.85), rgba(3, 3, 5, 0.98)),
-        /* Layer 2: Subtle Grid Pattern */
-        radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-        /* Layer 3: High-Quality Tech/Global Image */
-        url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop');
-      
-      background-size: cover, 40px 40px, cover;
-      background-position: center;
-      background-attachment: fixed; /* Parallax effect */
+      position: relative;
     }
+
+    /* --- 2. THE UNIQUE BACKGROUND FIX --- */
+    /* This method works on ALL mobiles */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      /* High-Quality Tech Universe Image */
+      background: 
+        linear-gradient(to bottom, rgba(5,5,10,0.6), rgba(5,5,10,0.9)),
+        url('https://images.unsplash.com/photo-1519681393798-2f13fbe54021?q=80&w=2070&auto=format&fit=crop');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: -2;
+    }
+
+    /* Floating Particles Animation (CSS Only) */
+    .particles {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px);
+      background-size: 30px 30px;
+      z-index: -1;
+      animation: float 20s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes float { 0% { transform: translateY(0); } 100% { transform: translateY(-50px); } }
 
     /* --- 3. UTILITIES --- */
     .container { max-width: 1080px; margin: auto; padding: 0 24px; position: relative; z-index: 2; }
@@ -70,86 +78,75 @@
 
     /* --- 4. HERO SECTION --- */
     .hero {
-      padding: 120px 0 60px; text-align: center; position: relative;
+      padding: 120px 0 60px; text-align: center;
     }
     
     .profile-ring {
       width: 140px; height: 140px; margin: 0 auto 20px;
       padding: 4px; border-radius: 50%;
       background: linear-gradient(135deg, var(--primary), var(--secondary));
-      position: relative;
-      box-shadow: 0 0 30px rgba(99, 102, 241, 0.4); /* Glowing effect */
+      box-shadow: 0 0 40px rgba(99, 102, 241, 0.5); /* Glowing Ring */
     }
     .profile-img {
       width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
-      border: 4px solid var(--bg); background: #222;
+      border: 4px solid #000; background: #222;
     }
     
-    .hero h1 { 
-      font-size: 3.5rem; line-height: 1.1; margin-bottom: 15px; 
-      text-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    }
+    .hero h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 15px; text-shadow: 0 10px 20px rgba(0,0,0,0.5); }
     .hero-role { 
       font-size: 1.1rem; color: var(--accent); font-weight: 600;
-      background: rgba(6, 182, 212, 0.1); padding: 5px 15px; border-radius: 50px;
-      display: inline-block; margin-bottom: 20px; 
-      border: 1px solid rgba(6, 182, 212, 0.2);
+      background: rgba(6, 182, 212, 0.15); padding: 5px 15px; border-radius: 50px;
+      display: inline-block; margin-bottom: 20px; border: 1px solid rgba(6, 182, 212, 0.3);
       backdrop-filter: blur(5px);
     }
     
     .action-buttons { display: flex; gap: 15px; justify-content: center; margin-top: 30px; }
-    
-    /* CV Button Pulse Animation */
     .btn {
       padding: 14px 32px; border-radius: 50px; font-weight: 600; text-decoration: none;
       transition: 0.3s; display: inline-flex; align-items: center; gap: 8px; font-size: 1rem;
     }
-    .btn-cv { 
+    .btn-primary { 
       background: white; color: black; 
-      box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
-      animation: pulse-white 2s infinite;
+      box-shadow: 0 0 20px rgba(255,255,255,0.3);
+      animation: pulse 2s infinite; 
     }
-    @keyframes pulse-white {
-      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); }
-      70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
-      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
-    }
+    @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
     
     .btn-outline { 
-      border: 1px solid var(--card-border); color: white; 
-      background: rgba(255,255,255,0.05); backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.3); color: white; 
+      background: rgba(255,255,255,0.05); backdrop-filter: blur(5px);
     }
     .btn:hover { transform: translateY(-3px); }
 
-    /* --- 5. TECH ARSENAL (Scrolling Ticker) --- */
+    /* --- 5. TECH TICKER --- */
     .tech-strip {
-      background: rgba(10, 10, 12, 0.5); 
+      background: rgba(0, 0, 0, 0.6); 
       border-top: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border);
       padding: 20px 0; margin-bottom: 80px; overflow: hidden; white-space: nowrap;
-      backdrop-filter: blur(5px);
+      backdrop-filter: blur(10px);
     }
     .tech-track { display: inline-block; animation: scroll 25s linear infinite; }
     .tech-item {
       display: inline-flex; align-items: center; gap: 8px; margin: 0 30px;
-      color: var(--text-muted); font-weight: 600; font-size: 1.1rem;
+      color: #cbd5e1; font-weight: 600; font-size: 1.1rem;
     }
     @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
     /* --- 6. PROJECTS (Glass Cards) --- */
     .project-card {
       background: var(--card-bg); 
-      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
       border: 1px solid var(--card-border);
-      border-radius: var(--radius-lg); padding: 30px; position: relative;
-      transition: 0.3s; overflow: hidden; display: flex; flex-direction: column; height: 100%;
+      border-radius: var(--radius-lg); padding: 30px; 
+      transition: 0.3s; display: flex; flex-direction: column;
     }
-    .project-card:hover { border-color: var(--primary); transform: translateY(-5px); background: rgba(20,20,30,0.8); }
+    .project-card:hover { border-color: var(--primary); transform: translateY(-7px); background: rgba(30, 30, 40, 0.8); }
     .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
     
     .tag-container { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 15px; }
     .tech-tag {
       font-size: 0.75rem; padding: 4px 10px; border-radius: 6px;
-      background: rgba(255,255,255,0.05); color: var(--text-muted);
+      background: rgba(255,255,255,0.08); color: var(--text-muted);
     }
     .project-icon {
       width: 50px; height: 50px; border-radius: 12px;
@@ -162,7 +159,7 @@
     .cert-item {
       display: flex; align-items: center; justify-content: space-between;
       padding: 20px; 
-      background: var(--card-bg); backdrop-filter: blur(10px);
+      background: var(--card-bg); backdrop-filter: blur(15px);
       border: 1px solid var(--card-border);
       border-radius: var(--radius-md); margin-bottom: 15px; transition: 0.3s;
     }
@@ -170,6 +167,7 @@
     .cert-left { display: flex; align-items: center; gap: 15px; }
     .cert-icon { font-size: 1.5rem; color: var(--success); }
     
+    /* Verified NPTEL */
     .cert-item.nptel { border-left: 3px solid var(--gold); }
     .cert-item.nptel .cert-icon { color: var(--gold); }
 
@@ -179,31 +177,30 @@
     }
     .award-card {
       text-align: center; padding: 30px 20px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(20,20,20,0) 100%);
+      background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(20,20,20,0) 100%);
       border: 1px solid var(--card-border); border-radius: var(--radius-lg);
-      transition: 0.3s; backdrop-filter: blur(5px);
+      transition: 0.3s; backdrop-filter: blur(10px);
     }
-    .award-card:hover { border-color: var(--gold); background: rgba(245, 158, 11, 0.05); }
+    .award-card:hover { border-color: var(--gold); background: rgba(245, 158, 11, 0.08); }
     .award-icon {
       font-size: 2rem; margin-bottom: 15px; color: var(--gold);
       text-shadow: 0 0 20px rgba(245, 158, 11, 0.4);
     }
     .award-date { font-size: 0.8rem; color: var(--text-muted); margin-top: 5px; display: block; }
 
-    /* --- 9. BENTO GRID --- */
+    /* --- 9. BENTO GRID (Leadership) --- */
     .bento-grid {
       display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; grid-auto-rows: minmax(140px, auto);
     }
     .bento-item {
-      background: var(--card-bg); backdrop-filter: blur(10px);
+      background: var(--card-bg); backdrop-filter: blur(15px);
       border: 1px solid var(--card-border);
       border-radius: var(--radius-lg); padding: 25px; display: flex; flex-direction: column; justify-content: center;
     }
     
-    .span-4 { grid-column: span 4; }
     .span-6 { grid-column: span 6; }
     .span-12 { grid-column: span 12; }
-    @media (max-width: 768px) { .span-4, .span-6 { grid-column: span 12; } }
+    @media (max-width: 768px) { .span-6 { grid-column: span 12; } }
 
     .role-badge {
       font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
@@ -236,6 +233,9 @@
 </head>
 <body>
 
+  <!-- FLOATING PARTICLES -->
+  <div class="particles"></div>
+
   <!-- HERO -->
   <header class="hero">
     <div class="container">
@@ -249,8 +249,8 @@
       </p>
       
       <div class="action-buttons">
-        <!-- LINK YOUR RESUME HERE. Example: href="resume.pdf" -->
-        <a href="resume.pdf" class="btn btn-cv"><i class="fas fa-file-download"></i> Download CV</a>
+        <!-- LINK YOUR RESUME HERE. UPLOAD FILE named 'resume.pdf' -->
+        <a href="resume.pdf" class="btn btn-primary" download><i class="fas fa-file-download"></i> Download CV</a>
         
         <a href="mailto:nidhishj100@gmail.com" class="btn btn-outline"><i class="fas fa-envelope"></i> Hire Me</a>
       </div>
@@ -267,11 +267,8 @@
       <span class="tech-item"><i class="fas fa-satellite"></i> Google Earth Engine</span>
       <span class="tech-item"><i class="fas fa-brain"></i> AI & ML</span>
       <span class="tech-item"><i class="fas fa-leaf"></i> Environmental Tech</span>
-      <!-- Duplicate for infinite scroll effect -->
       <span class="tech-item"><i class="fab fa-python"></i> Python</span>
       <span class="tech-item"><i class="fas fa-microchip"></i> IoT & Sensors</span>
-      <span class="tech-item"><i class="fab fa-java"></i> Java</span>
-      <span class="tech-item"><i class="fas fa-robot"></i> Robotics</span>
     </div>
   </div>
 
@@ -331,13 +328,13 @@
       </div>
     </section>
 
-    <!-- SECTION 1: CERTIFICATIONS -->
+    <!-- CERTIFICATIONS -->
     <section>
       <div class="section-head">
         <h2 class="section-title"><i class="fas fa-certificate"></i> Verified Certifications</h2>
       </div>
 
-      <!-- NPTEL (Normal but Professional) -->
+      <!-- Verified NPTEL -->
       <div class="cert-item nptel">
         <div class="cert-left">
           <i class="fas fa-university" style="font-size: 1.5rem; color: var(--text-muted);"></i>
@@ -371,7 +368,7 @@
       </div>
     </section>
 
-    <!-- SECTION 2: HALL OF FAME (Awards) -->
+    <!-- AWARDS -->
     <section>
       <div class="section-head">
         <div>
@@ -381,23 +378,20 @@
       </div>
 
       <div class="awards-grid">
-        <!-- 1. Rajya Puraskar -->
         <div class="award-card">
           <i class="fas fa-crown award-icon"></i>
-          <h3>Rajya Puraskar Award</h3>
+          <h3>Rajya Puraskar</h3>
           <p style="color:var(--text-muted); font-size:0.9rem; margin-top:5px;">Governor of Kerala</p>
           <span class="award-date">Scouts & Guides | Dec 2021</span>
         </div>
 
-        <!-- 2. Sri Pranlal -->
         <div class="award-card">
           <i class="fas fa-hands-helping award-icon" style="color: #f472b6;"></i>
           <h3>Sri Pranlal Award</h3>
           <p style="color:var(--text-muted); font-size:0.9rem; margin-top:5px;">Bharatiya Vidya Bhavan</p>
-          <span class="award-date">For Harmonious Behaviour | Dec 2020</span>
+          <span class="award-date">Harmonious Behaviour | Dec 2020</span>
         </div>
 
-        <!-- 3. Pinnacle Award -->
         <div class="award-card">
           <i class="fas fa-star award-icon" style="color: var(--accent);"></i>
           <h3>Pinnacle Award</h3>
@@ -405,7 +399,6 @@
           <span class="award-date">Best Organiser | Dec 2022</span>
         </div>
 
-        <!-- 4. True Blue -->
         <div class="award-card">
           <i class="fas fa-gem award-icon" style="color: var(--primary);"></i>
           <h3>True Blue Award</h3>
@@ -415,17 +408,16 @@
       </div>
     </section>
 
-    <!-- SECTION 3: LEADERSHIP & EXTRACURRICULAR (Bento Grid) -->
+    <!-- LEADERSHIP & EXTRACURRICULAR -->
     <section>
       <div class="section-head">
         <div>
           <h2 class="section-title"><i class="fas fa-rocket" style="color: var(--secondary);"></i> Leadership & Impact</h2>
-          <p class="section-subtitle">Conferences, Hackathons, and Roles of Responsibility.</p>
+          <p class="section-subtitle">Roles of Responsibility & Competition.</p>
         </div>
       </div>
 
       <div class="bento-grid">
-        
         <!-- Hackathons -->
         <div class="bento-item span-6">
           <span class="role-badge">Innovation</span>
@@ -460,11 +452,10 @@
             </div>
           </div>
         </div>
-
       </div>
     </section>
 
-    <!-- SECTION 4: REFERENCES -->
+    <!-- REFERENCES -->
     <section>
       <div class="section-head">
         <h2 class="section-title"><i class="fas fa-users"></i> Academic References</h2>
@@ -480,7 +471,6 @@
             <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 2px;">Dhanalakshmi Srinivasan College</p>
           </div>
         </div>
-
         <!-- Mentor 2 -->
         <div class="mentor-card">
           <img src="sruthy.jpg" onerror="this.src='https://via.placeholder.com/60'" class="mentor-img" alt="Mrs. Sruthy">
@@ -490,7 +480,6 @@
             <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 2px;">Academic Guide</p>
           </div>
         </div>
-
         <!-- Mentor 3 -->
         <div class="mentor-card">
           <img src="monica.jpg" onerror="this.src='https://via.placeholder.com/60'" class="mentor-img" alt="Mrs. Monica">
