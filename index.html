@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nidhish J - Portfolio</title>
+  <title>Nidhish J - Professional Portfolio</title>
 
-  <!-- Google Fonts & Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
@@ -14,403 +14,297 @@
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; scroll-behavior: smooth; }
     
     :root {
-      --bg: #0b0f19;
+      --bg-dark: #050505;
       --text: #e2e8f0;
-      --glass: rgba(20, 25, 40, 0.7);
-      --glass-border: rgba(255, 255, 255, 0.08);
-      --primary: #6366f1;
-      --accent: #a855f7;
+      --text-muted: #94a3b8;
+      
+      /* Glassmorphism Variables */
+      --glass: rgba(20, 20, 20, 0.75);
+      --glass-light: rgba(255, 255, 255, 0.05);
+      --glass-border: rgba(255, 255, 255, 0.1);
+      
+      --primary: #8b5cf6;
+      --accent: #3b82f6;
       --gold: #fbbf24;
-      --gradient: linear-gradient(135deg, #6366f1, #a855f7);
-      --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+      
+      --gradient: linear-gradient(135deg, #8b5cf6, #3b82f6);
     }
 
-    [data-theme="light"] {
-      --bg: #f0f4f8;
-      --text: #1e293b;
-      --glass: rgba(255, 255, 255, 0.9);
-      --glass-border: rgba(0, 0, 0, 0.05);
-      --primary: #4f46e5;
-      --accent: #d946ef;
-      --shadow: 0 10px 30px -10px rgba(50, 50, 93, 0.25);
+    body { 
+      background-color: var(--bg-dark);
+      color: var(--text);
+      overflow-x: hidden;
+      /* COOL BACKGROUND IMAGE HERE */
+      background-image: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop');
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
     }
 
-    body { background: var(--bg); color: var(--text); overflow-x: hidden; transition: 0.3s; }
-
-    /* --- ANIMATED BACKGROUND --- */
-    .orb {
-      position: fixed; border-radius: 50%; filter: blur(80px); opacity: 0.4; z-index: -1;
-      animation: floatOrb 10s ease-in-out infinite alternate;
-    }
-    .orb-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: var(--primary); }
-    .orb-2 { bottom: -10%; right: -10%; width: 50vw; height: 50vw; background: var(--accent); animation-delay: -5s; }
-    
-    @keyframes floatOrb { from { transform: translate(0, 0); } to { transform: translate(30px, 50px); } }
-
-    /* --- HEADER (Animated Gradient) --- */
+    /* --- HEADER --- */
     header {
-      background: linear-gradient(-45deg, #3b82f6, #6366f1, #8b5cf6, #d946ef);
-      background-size: 400% 400%;
-      animation: gradientBG 10s ease infinite;
-      padding: 80px 20px 140px; /* Extra padding for mobile spacing */
-      text-align: center; color: white;
-      border-radius: 0 0 50px 50px;
-      box-shadow: 0 10px 40px rgba(99, 102, 241, 0.4);
-      position: relative; overflow: hidden;
+      padding: 100px 20px 140px;
+      text-align: center;
+      background: radial-gradient(circle at 50% -20%, rgba(59, 130, 246, 0.3), transparent 70%);
+      border-bottom: 1px solid var(--glass-border);
     }
-
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    /* Contact Badge in Header */
-    .contact-badge {
-      background: rgba(0, 0, 0, 0.25);
-      backdrop-filter: blur(5px);
-      padding: 8px 16px;
-      border-radius: 30px;
-      font-size: 0.85rem;
-      display: inline-block;
-      margin-top: 15px;
-      border: 1px solid rgba(255,255,255,0.2);
-    }
-
-    /* --- PROFILE PICTURE --- */
-    .profile-container {
-      position: relative; width: 170px; margin: -85px auto 20px;
+    
+    .profile-wrap {
+      width: 160px; height: 160px; margin: -80px auto 20px;
+      padding: 5px; background: rgba(255,255,255,0.1);
+      border-radius: 50%; backdrop-filter: blur(10px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
     }
     .profile-pic {
-      width: 170px; height: 170px; border-radius: 50%; object-fit: cover;
-      border: 6px solid var(--bg);
-      box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-      background: #222;
-    }
-    .status-dot {
-      position: absolute; bottom: 15px; right: 10px;
-      width: 25px; height: 25px; background: #22c55e;
-      border: 4px solid var(--bg); border-radius: 50%;
+      width: 100%; height: 100%; border-radius: 50%; object-fit: cover;
+      border: 4px solid #1a1a1a;
     }
 
-    /* --- LAYOUT CONTAINER --- */
-    .container { max-width: 1000px; margin: auto; padding: 20px; }
+    /* --- CONTAINER --- */
+    .container { max-width: 1100px; margin: auto; padding: 0 20px; }
 
-    /* --- SECTIONS & CARDS --- */
-    section {
-      margin-bottom: 40px; opacity: 0; animation: fadeUp 0.8s forwards;
+    /* --- SECTIONS --- */
+    section { margin-bottom: 50px; }
+    
+    .card {
+      background: var(--glass);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      transition: transform 0.3s;
     }
-    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+    .card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.2); }
 
-    .section-title {
-      font-size: 1.5rem; color: var(--primary); margin-bottom: 20px;
+    h2 { 
+      font-family: 'Playfair Display', serif; 
+      font-size: 2rem; margin-bottom: 25px; 
+      background: linear-gradient(90deg, #fff, #94a3b8);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    /* --- MENTOR STYLES --- */
+    .mentor-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+    .mentor-item { text-align: center; padding: 20px; background: var(--glass-light); border-radius: 15px; border: 1px solid var(--glass-border); }
+    .mentor-img { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary); margin-bottom: 10px; }
+
+    /* --- CERTIFICATIONS --- */
+    .cert-grid { display: flex; flex-wrap: wrap; gap: 12px; }
+    .cert-badge {
       display: flex; align-items: center; gap: 10px;
-    }
-    .section-title::after {
-      content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--primary), transparent); margin-left: 15px; opacity: 0.5;
-    }
-
-    /* --- MENTOR CARDS --- */
-    .mentor-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;
-    }
-    .mentor-card {
-      background: var(--glass); border: 1px solid var(--glass-border);
-      padding: 20px 10px; border-radius: 20px; text-align: center;
-      transition: 0.3s; position: relative; overflow: hidden;
-    }
-    .mentor-card:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: 0 10px 20px rgba(99, 102, 241, 0.15); }
-    
-    .mentor-pic {
-      width: 80px; height: 80px; border-radius: 50%; margin-bottom: 10px; object-fit: cover;
-      border: 3px solid var(--accent); padding: 2px;
-    }
-    .mentor-name { font-weight: 700; font-size: 1rem; margin-bottom: 2px; }
-    .mentor-role { font-size: 0.75rem; opacity: 0.8; }
-
-    /* --- PROJECTS --- */
-    .project-card {
-      background: var(--glass); border: 1px solid var(--glass-border);
-      padding: 25px; border-radius: 20px; margin-bottom: 15px;
-      transition: 0.3s; position: relative;
-    }
-    .project-card:hover {
-      transform: scale(1.02); background: linear-gradient(145deg, rgba(99,102,241,0.1), rgba(0,0,0,0));
-      border-color: var(--primary);
-    }
-    .project-header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
-    .project-icon { 
-      width: 40px; height: 40px; background: var(--gradient); color: white;
-      border-radius: 10px; display: flex; align-items: center; justify-content: center;
-    }
-
-    /* --- CERTIFICATIONS (New Awesome Design) --- */
-    .cert-grid { display: flex; flex-wrap: wrap; gap: 10px; }
-    
-    .cert-item {
-      display: flex; align-items: center; gap: 8px;
+      padding: 10px 16px; border-radius: 50px;
       background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border);
-      padding: 10px 15px; border-radius: 12px; font-size: 0.9rem;
+      font-size: 0.9rem; color: var(--text-muted);
       transition: 0.3s;
     }
-    .cert-item:hover { background: rgba(255,255,255,0.1); }
+    .cert-badge:hover { background: rgba(255,255,255,0.1); color: white; }
+    .cert-badge.gold { border-color: rgba(251, 191, 36, 0.3); background: rgba(251, 191, 36, 0.05); color: #fbbf24; }
 
-    /* Highlighted NPTEL Cert */
-    .cert-item.gold {
-      background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(0,0,0,0));
-      border: 1px solid rgba(251, 191, 36, 0.4);
-      color: #fbbf24;
+    /* --- PROJECTS --- */
+    .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+    .project-card { 
+      background: linear-gradient(160deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+      padding: 25px; border-radius: 16px; border: 1px solid var(--glass-border);
     }
-    .cert-item.gold i { color: #fbbf24; }
+    .project-title { font-size: 1.25rem; font-weight: 600; margin-bottom: 5px; color: white; }
+    .project-tech { font-size: 0.8rem; color: var(--primary); margin-bottom: 10px; display: block; text-transform: uppercase; letter-spacing: 1px; }
 
-    /* --- TIMELINE (Resume) --- */
-    .timeline-item {
-      position: relative; padding-left: 25px; margin-bottom: 25px; border-left: 2px solid var(--glass-border);
+    /* --- NEW FOOTER (Like Reference) --- */
+    footer {
+      background: #0a0a0a;
+      border-top: 1px solid #222;
+      padding: 60px 20px 30px;
+      margin-top: 80px;
+      position: relative;
     }
-    .timeline-item::before {
-      content: ''; position: absolute; left: -6px; top: 5px;
-      width: 10px; height: 10px; background: var(--primary); border-radius: 50%;
-      box-shadow: 0 0 10px var(--primary);
-    }
-    .timeline-date { font-size: 0.8rem; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
 
-    /* --- BUTTONS --- */
-    .btn-group { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 30px; }
-    .btn {
-      text-decoration: none; padding: 12px 30px; border-radius: 30px;
-      font-weight: 600; transition: 0.3s; display: inline-flex; align-items: center; gap: 8px;
+    .footer-content {
+      max-width: 1100px; margin: auto;
+      display: grid; grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 40px;
     }
-    .btn-primary {
-      background: white; color: var(--primary);
-    }
-    .btn-outline {
-      border: 2px solid white; color: white;
-    }
-    .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
 
-    /* --- FOOTER --- */
-    footer { text-align: center; padding: 40px; opacity: 0.6; font-size: 0.85rem; border-top: 1px solid var(--glass-border); margin-top: 40px; }
+    @media (max-width: 768px) {
+      .footer-content { grid-template-columns: 1fr; gap: 40px; }
+    }
 
-    /* --- THEME TOGGLE --- */
-    .theme-toggle {
-      position: absolute; top: 25px; right: 25px;
-      background: rgba(255,255,255,0.2); width: 40px; height: 40px;
+    .footer-brand h3 {
+      font-family: 'Playfair Display', serif; font-size: 1.8rem; color: white; margin-bottom: 15px;
+    }
+    .footer-brand p {
+      color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 25px; max-width: 300px;
+    }
+
+    .social-icons { display: flex; gap: 10px; }
+    .social-btn {
+      width: 40px; height: 40px; background: #1a1a1a; color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 8px; text-decoration: none; border: 1px solid #333;
+      transition: 0.3s;
+    }
+    .social-btn:hover { background: var(--primary); border-color: var(--primary); }
+
+    .footer-links h4 { color: white; margin-bottom: 20px; font-weight: 600; }
+    .footer-links ul { list-style: none; }
+    .footer-links li { margin-bottom: 12px; }
+    .footer-links a { color: var(--text-muted); text-decoration: none; transition: 0.2s; font-size: 0.95rem; }
+    .footer-links a:hover { color: white; }
+
+    .footer-bottom {
+      max-width: 1100px; margin: 40px auto 0;
+      padding-top: 20px; border-top: 1px solid #1a1a1a;
+      text-align: center; color: #555; font-size: 0.85rem;
+    }
+
+    /* Floating Action Button */
+    .fab {
+      position: fixed; bottom: 30px; right: 30px;
+      width: 55px; height: 55px; background: #2dd4bf; color: #000;
       border-radius: 50%; display: flex; align-items: center; justify-content: center;
-      cursor: pointer; backdrop-filter: blur(5px); z-index: 50; transition: 0.3s;
+      font-size: 1.5rem; box-shadow: 0 10px 20px rgba(45, 212, 191, 0.3);
+      cursor: pointer; z-index: 100; transition: 0.3s;
     }
-    .theme-toggle:active { transform: scale(0.9); }
+    .fab:hover { transform: scale(1.1); }
 
   </style>
 </head>
 <body>
 
-<!-- Background Orbs -->
-<div class="orb orb-1"></div>
-<div class="orb orb-2"></div>
-
 <header>
-  <div class="theme-toggle" onclick="toggleTheme()"><i class="fas fa-adjust"></i></div>
-  
-  <h1 style="font-size: 2.8rem; letter-spacing: -1px; margin-bottom: 5px;">Nidhish J</h1>
-  <p style="font-size: 1.2rem; opacity: 0.95; font-weight: 300;">Innovator | Developer | Problem Solver</p>
-  <p style="font-size: 0.9rem; opacity: 0.8; margin-top: 5px;">Dhanalakshmi Srinivasan College of Engineering, Coimbatore</p>
-  
-  <div class="contact-badge">
-    <i class="fas fa-envelope"></i> nidhishj100@gmail.com &nbsp;|&nbsp; <i class="fas fa-phone"></i> +91 6282350214
-  </div>
-  
-  <div class="btn-group">
-    <a href="mailto:nidhishj100@gmail.com" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Hire Me</a>
-    <a href="https://linkedin.com/in/nidhishj100" class="btn btn-outline"><i class="fab fa-linkedin"></i> LinkedIn</a>
-  </div>
+  <h1 style="font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 10px;">Nidhish J</h1>
+  <p style="color: var(--text-muted); letter-spacing: 2px; font-size: 0.9rem;">INNOVATOR &bull; DEVELOPER &bull; CSE</p>
 </header>
 
-<div class="profile-container">
-  <!-- Ensure your photo is named 'me.jpg' in GitHub -->
-  <img src="me.jpg" onerror="this.src='https://via.placeholder.com/170'" class="profile-pic" alt="Nidhish">
-  <div class="status-dot"></div>
+<div class="profile-wrap">
+  <img src="me.jpg" onerror="this.src='https://via.placeholder.com/150'" class="profile-pic" alt="Nidhish">
 </div>
 
 <div class="container">
 
-  <!-- OBJECTIVE -->
-  <section style="animation-delay: 0.1s;">
-    <h2 class="section-title"><i class="fas fa-bullseye"></i> Objective</h2>
-    <div style="background: var(--glass); padding: 25px; border-radius: 20px; border: 1px solid var(--glass-border); line-height: 1.6;">
+  <!-- Objective -->
+  <section class="card">
+    <h2>Professional Objective</h2>
+    <p style="line-height: 1.8; color: var(--text-muted);">
       To contribute to innovative, technology-driven projects by applying strong skills in programming, problem-solving, and modern computing technologies, while continuously expanding my expertise and delivering value that supports both organizational success and personal professional growth.
-    </div>
+    </p>
   </section>
 
-  <!-- MENTORS -->
-  <section style="animation-delay: 0.2s;">
-    <h2 class="section-title"><i class="fas fa-chalkboard-user"></i> My Mentors</h2>
+  <!-- Mentors -->
+  <section>
+    <h2>Mentors & Guides</h2>
     <div class="mentor-grid">
-      <!-- Mentor 1 -->
-      <div class="mentor-card">
-        <img src="rajesh.jpg" onerror="this.src='https://via.placeholder.com/80?text=Rajesh'" class="mentor-pic" alt="Dr. Rajesh">
-        <div class="mentor-name">Dr. B. Rajesh Kumar</div>
-        <div class="mentor-role">HOD CSE</div>
+      <div class="mentor-item">
+        <img src="rajesh.jpg" onerror="this.src='https://via.placeholder.com/90'" class="mentor-img" alt="Rajesh">
+        <h4>Dr. B. Rajesh Kumar</h4>
+        <small style="color: var(--text-muted);">HOD CSE</small>
       </div>
-      <!-- Mentor 2 -->
-      <div class="mentor-card">
-        <img src="sruthy.jpg" onerror="this.src='https://via.placeholder.com/80?text=Sruthy'" class="mentor-pic" alt="Mrs. Sruthy">
-        <div class="mentor-name">Mrs. Sruthy KV</div>
-        <div class="mentor-role">Asst. Prof CSE</div>
+      <div class="mentor-item">
+        <img src="sruthy.jpg" onerror="this.src='https://via.placeholder.com/90'" class="mentor-img" alt="Sruthy">
+        <h4>Mrs. Sruthy KV</h4>
+        <small style="color: var(--text-muted);">Asst. Prof CSE</small>
       </div>
-      <!-- Mentor 3 -->
-      <div class="mentor-card">
-        <img src="monica.jpg" onerror="this.src='https://via.placeholder.com/80?text=Monica'" class="mentor-pic" alt="Mrs. Monica">
-        <div class="mentor-name">Mrs. Monica Murthy</div>
-        <div class="mentor-role">NLP Trainer & Psychology</div>
+      <div class="mentor-item">
+        <img src="monica.jpg" onerror="this.src='https://via.placeholder.com/90'" class="mentor-img" alt="Monica">
+        <h4>Mrs. Monica Murthy</h4>
+        <small style="color: var(--text-muted);">NLP & Psychology Coach</small>
       </div>
     </div>
   </section>
 
-  <!-- EDUCATION & EXPERIENCE ROW -->
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
-    
-    <!-- Experience -->
-    <section style="animation-delay: 0.3s; margin-bottom: 0;">
-      <h2 class="section-title"><i class="fas fa-briefcase"></i> Experience</h2>
-      
-      <div class="timeline-item">
-        <div class="timeline-date">Internship</div>
-        <h3 style="font-size: 1.1rem;">AI with Robotics</h3>
-        <p style="font-size: 0.9rem; opacity: 0.8;">ROBOMATIIC (Div of CAAD Technologies)</p>
-        <p style="font-size: 0.9rem; margin-top: 5px;">Linux, Google Colab, and Arduino integration.</p>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-date">Internship</div>
-        <h3 style="font-size: 1.1rem;">IoT Developer</h3>
-        <p style="font-size: 0.9rem; opacity: 0.8;">Mindful AI Pvt. Ltd.</p>
-        <p style="font-size: 0.9rem; margin-top: 5px;">Smart Energy Meters & Real-time monitoring.</p>
-      </div>
-    </section>
-
-    <!-- Education -->
-    <section style="animation-delay: 0.4s; margin-bottom: 0;">
-      <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Education</h2>
-      
-      <div class="timeline-item">
-        <div class="timeline-date">2024 – 2028</div>
-        <h3 style="font-size: 1.1rem;">B.E. Computer Science</h3>
-        <p style="font-size: 0.9rem; opacity: 0.8;">Dhanalakshmi Srinivasan College of Engineering</p>
-      </div>
-
-      <div class="timeline-item">
-        <div class="timeline-date">Completed 2024</div>
-        <h3 style="font-size: 1.1rem;">Higher Secondary</h3>
-        <p style="font-size: 0.9rem; opacity: 0.8;">Bhavan's Vidya Mandir, Chithali</p>
-      </div>
-    </section>
-
-  </div> <!-- End Grid -->
-
-  <br><br>
-
-  <!-- CERTIFICATIONS -->
-  <section style="animation-delay: 0.5s;">
-    <h2 class="section-title"><i class="fas fa-certificate"></i> Certifications</h2>
+  <!-- Certifications -->
+  <section class="card">
+    <h2>Certifications</h2>
     <div class="cert-grid">
-      <!-- Special Gold Cert -->
-      <div class="cert-item gold">
-        <i class="fas fa-star"></i>
-        <div><strong>NPTEL Cloud Computing</strong> <br> <span style="font-size: 0.8rem; opacity: 0.8;">IIT Kharagpur / MOE India</span></div>
+      <div class="cert-badge gold">
+        <i class="fas fa-certificate"></i> NPTEL Cloud Computing (IIT Kharagpur)
       </div>
-      
-      <div class="cert-item"><i class="fas fa-check-circle" style="color:var(--accent)"></i> Infosys Data Science</div>
-      <div class="cert-item"><i class="fas fa-check-circle" style="color:var(--accent)"></i> Google Cloud Security</div>
-      <div class="cert-item"><i class="fas fa-check-circle" style="color:var(--accent)"></i> TCS iON Communication</div>
-      <div class="cert-item"><i class="fas fa-check-circle" style="color:var(--accent)"></i> Coursera Python</div>
-      <div class="cert-item"><i class="fas fa-check-circle" style="color:var(--accent)"></i> Java (LearnQuest)</div>
-      <div class="cert-item"><i class="fas fa-check-circle" style="color:var(--accent)"></i> AI Image Processing</div>
+      <div class="cert-badge"><i class="fas fa-check"></i> Infosys Data Science</div>
+      <div class="cert-badge"><i class="fas fa-check"></i> Google Cloud Security</div>
+      <div class="cert-badge"><i class="fas fa-check"></i> TCS iON Communication</div>
+      <div class="cert-badge"><i class="fas fa-check"></i> Coursera Python</div>
+      <div class="cert-badge"><i class="fas fa-check"></i> Java (LearnQuest)</div>
     </div>
   </section>
 
-  <!-- PROJECTS -->
-  <section style="animation-delay: 0.6s;">
-    <h2 class="section-title"><i class="fas fa-code-branch"></i> Awesome Projects</h2>
-    
-    <div class="project-card">
-      <div class="project-header">
-        <div class="project-icon"><i class="fas fa-tree"></i></div>
-        <div>
-          <h3 style="font-size: 1.2rem;">Deforestation Detection</h3>
-          <span style="font-size: 0.8rem; color: var(--primary);">Google Earth Engine (GEE)</span>
-        </div>
+  <!-- Projects -->
+  <section>
+    <h2>Featured Projects</h2>
+    <div class="project-grid">
+      <div class="project-card">
+        <span class="project-tech">Google Earth Engine</span>
+        <div class="project-title">Deforestation Detection</div>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Using satellite data and time-series NDVI analysis to detect large-scale forest changes automatically in real-time.</p>
       </div>
-      <p style="font-size: 0.95rem; opacity: 0.9;">
-        Using satellite data and time-series NDVI analysis to detect large-scale forest changes automatically in real-time.
-      </p>
-    </div>
-
-    <div class="project-card">
-      <div class="project-header">
-        <div class="project-icon"><i class="fas fa-bolt"></i></div>
-        <div>
-          <h3 style="font-size: 1.2rem;">Smart Energy Meter</h3>
-          <span style="font-size: 0.8rem; color: var(--primary);">IoT & Automation</span>
-        </div>
+      <div class="project-card">
+        <span class="project-tech">IoT & Cloud</span>
+        <div class="project-title">Smart Energy Meter</div>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Real-time power monitoring, automated billing generation, and tamper alerts using cloud dashboards.</p>
       </div>
-      <p style="font-size: 0.95rem; opacity: 0.9;">
-        A smart system for real-time power monitoring, automated billing generation, and tamper alerts using cloud dashboards.
-      </p>
-    </div>
-
-    <div class="project-card">
-      <div class="project-header">
-        <div class="project-icon"><i class="fas fa-drone"></i></div>
-        <div>
-          <h3 style="font-size: 1.2rem;">Life Lens</h3>
-          <span style="font-size: 0.8rem; color: var(--primary);">Drone Technology</span>
-        </div>
+      <div class="project-card">
+        <span class="project-tech">Drone Tech</span>
+        <div class="project-title">Life Lens</div>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Drone-powered real-time road hazard detection & emergency response system.</p>
       </div>
-      <p style="font-size: 0.95rem; opacity: 0.9;">
-        Drone-powered real-time road hazard detection & emergency response system for safer cities.
-      </p>
-    </div>
-
-  </section>
-
-  <!-- ACHIEVEMENTS -->
-  <section style="animation-delay: 0.7s;">
-    <h2 class="section-title"><i class="fas fa-trophy"></i> Awards & Achievements</h2>
-    <div style="background: var(--glass); padding: 25px; border-radius: 20px; border: 1px solid var(--glass-border);">
-      <ul style="list-style: none; padding: 0;">
-        <li style="margin-bottom: 15px; display: flex; gap: 10px;">
-          <i class="fas fa-medal" style="color: #fbbf24; margin-top: 3px;"></i>
-          <span><strong>Rajya Puraskar Award:</strong> Honored by the Governor of Kerala (Scouts & Guides).</span>
-        </li>
-        <li style="margin-bottom: 15px; display: flex; gap: 10px;">
-          <i class="fas fa-award" style="color: var(--accent); margin-top: 3px;"></i>
-          <span><strong>Paper Presentation:</strong> "Detecting Deforestation using GEE" at National Conference.</span>
-        </li>
-        <li style="margin-bottom: 15px; display: flex; gap: 10px;">
-          <i class="fas fa-award" style="color: var(--accent); margin-top: 3px;"></i>
-          <span><strong>Sri Pranlal Award:</strong> For Harmonious Behaviour (Bharatiya Vidya Bhavan, Delhi).</span>
-        </li>
-        <li style="margin-bottom: 15px; display: flex; gap: 10px;">
-          <i class="fas fa-laptop-code" style="color: var(--accent); margin-top: 3px;"></i>
-          <span><strong>Hackathon 2 (2025):</strong> Active Participant at DSCE, Coimbatore.</span>
-        </li>
-      </ul>
     </div>
   </section>
 
 </div>
 
+<!-- FOOTER START -->
 <footer>
-  <p>© 2025 Nidhish J — Designed with <i class="fas fa-heart" style="color: #ef4444;"></i></p>
-</footer>
+  <div class="footer-content">
+    
+    <!-- Column 1: Brand -->
+    <div class="footer-brand">
+      <h3>Nidhish J</h3>
+      <p>
+        Building the future with code. Specialized in AI, IoT, and Web Development. Helping professionals and businesses innovate through technology.
+      </p>
+      <div class="social-icons">
+        <a href="https://linkedin.com/in/nidhishj100" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="mailto:nidhishj100@gmail.com" class="social-btn"><i class="fas fa-envelope"></i></a>
+        <a href="tel:+916282350214" class="social-btn"><i class="fas fa-phone"></i></a>
+        <a href="#" class="social-btn"><i class="fab fa-github"></i></a>
+      </div>
+    </div>
 
-<script>
-  function toggleTheme() {
-    const html = document.documentElement;
-    const current = html.getAttribute("data-theme");
-    html.setAttribute("data-theme", current === "light" ? "dark" : "light");
-  }
-</script>
+    <!-- Column 2: Quick Links -->
+    <div class="footer-links">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About Me</a></li>
+        <li><a href="#">Projects</a></li>
+        <li><a href="#">Mentors</a></li>
+        <li><a href="#">Resume</a></li>
+      </ul>
+    </div>
+
+    <!-- Column 3: Legal/Other -->
+    <div class="footer-links">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms & Conditions</a></li>
+        <li><a href="#">Cookie Policy</a></li>
+        <li><a href="#">Credits</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    &copy; 2025 Nidhish J. All rights reserved. <br>
+    Built with care for high-performers who value technology.
+  </div>
+
+  <!-- Floating Action Button -->
+  <div class="fab" title="Quick Action">
+    <i class="fas fa-bolt"></i>
+  </div>
+</footer>
 
 </body>
 </html>
