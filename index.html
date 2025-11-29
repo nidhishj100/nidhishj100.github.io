@@ -6,302 +6,402 @@
   <title>Nidhish J - Portfolio</title>
 
   <!-- Google Fonts & Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
+    /* --- RESET & VARIABLES --- */
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; scroll-behavior: smooth; }
     
     :root {
-      --bg: #0f172a;
+      --bg: #0b0f19;
       --text: #e2e8f0;
-      --glass: rgba(30, 41, 59, 0.7);
+      --glass: rgba(20, 25, 40, 0.7);
+      --glass-border: rgba(255, 255, 255, 0.08);
       --primary: #6366f1;
-      --accent: #8b5cf6;
-      --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-      --border: rgba(255, 255, 255, 0.1);
+      --accent: #a855f7;
+      --gold: #fbbf24;
+      --gradient: linear-gradient(135deg, #6366f1, #a855f7);
+      --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
     }
 
     [data-theme="light"] {
-      --bg: #f8fafc;
+      --bg: #f0f4f8;
       --text: #1e293b;
-      --glass: rgba(255, 255, 255, 0.85);
+      --glass: rgba(255, 255, 255, 0.9);
+      --glass-border: rgba(0, 0, 0, 0.05);
       --primary: #4f46e5;
       --accent: #d946ef;
-      --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-      --border: rgba(0, 0, 0, 0.1);
+      --shadow: 0 10px 30px -10px rgba(50, 50, 93, 0.25);
     }
 
-    body { background: var(--bg); color: var(--text); transition: 0.3s ease; overflow-x: hidden; }
+    body { background: var(--bg); color: var(--text); overflow-x: hidden; transition: 0.3s; }
 
-    /* Animated Background */
-    .blob {
-      position: fixed; top: -10%; left: -10%; width: 50vw; height: 50vw;
-      background: var(--primary); filter: blur(100px); opacity: 0.4; z-index: -1;
-      animation: move 10s infinite alternate; border-radius: 50%;
+    /* --- ANIMATED BACKGROUND --- */
+    .orb {
+      position: fixed; border-radius: 50%; filter: blur(80px); opacity: 0.4; z-index: -1;
+      animation: floatOrb 10s ease-in-out infinite alternate;
     }
-    .blob:nth-child(2) { top: auto; bottom: -10%; left: auto; right: -10%; background: var(--accent); animation-delay: -5s; }
-    @keyframes move { from { transform: translate(0,0); } to { transform: translate(50px, 50px); } }
+    .orb-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: var(--primary); }
+    .orb-2 { bottom: -10%; right: -10%; width: 50vw; height: 50vw; background: var(--accent); animation-delay: -5s; }
+    
+    @keyframes floatOrb { from { transform: translate(0, 0); } to { transform: translate(30px, 50px); } }
 
-    /* Header - FIXED PADDING HERE */
+    /* --- HEADER (Animated Gradient) --- */
     header {
-      padding: 100px 20px 120px; /* Increased bottom padding to 120px so text isn't hidden */
-      text-align: center;
-      background: linear-gradient(135deg, rgba(99,102,241,0.95), rgba(139,92,246,0.95));
-      color: white; border-radius: 0 0 40px 40px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      background: linear-gradient(-45deg, #3b82f6, #6366f1, #8b5cf6, #d946ef);
+      background-size: 400% 400%;
+      animation: gradientBG 10s ease infinite;
+      padding: 80px 20px 140px; /* Extra padding for mobile spacing */
+      text-align: center; color: white;
+      border-radius: 0 0 50px 50px;
+      box-shadow: 0 10px 40px rgba(99, 102, 241, 0.4);
+      position: relative; overflow: hidden;
     }
 
-    .header-content p {
-        margin-top: 8px;
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
+    /* Contact Badge in Header */
+    .contact-badge {
+      background: rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(5px);
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      display: inline-block;
+      margin-top: 15px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    /* --- PROFILE PICTURE --- */
+    .profile-container {
+      position: relative; width: 170px; margin: -85px auto 20px;
+    }
     .profile-pic {
-      width: 160px; height: 160px; border-radius: 50%; object-fit: cover;
-      border: 5px solid white; margin-top: -80px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-      background: #ddd; 
+      width: 170px; height: 170px; border-radius: 50%; object-fit: cover;
+      border: 6px solid var(--bg);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+      background: #222;
+    }
+    .status-dot {
+      position: absolute; bottom: 15px; right: 10px;
+      width: 25px; height: 25px; background: #22c55e;
+      border: 4px solid var(--bg); border-radius: 50%;
     }
 
-    .container { max-width: 950px; margin: auto; padding: 20px; }
+    /* --- LAYOUT CONTAINER --- */
+    .container { max-width: 1000px; margin: auto; padding: 20px; }
 
-    /* General Section Styles */
+    /* --- SECTIONS & CARDS --- */
     section {
-      background: var(--glass);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      padding: 30px; margin-top: 30px;
-      border-radius: 20px;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      animation: floatUp 0.8s ease-out;
+      margin-bottom: 40px; opacity: 0; animation: fadeUp 0.8s forwards;
+    }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+    .section-title {
+      font-size: 1.5rem; color: var(--primary); margin-bottom: 20px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-title::after {
+      content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--primary), transparent); margin-left: 15px; opacity: 0.5;
     }
 
-    h2 { color: var(--primary); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; border-bottom: 2px solid var(--border); padding-bottom: 10px; }
-    h3 { margin-top: 15px; margin-bottom: 5px; color: var(--text); }
-    
-    .subtitle { font-size: 0.9rem; opacity: 0.8; margin-bottom: 10px; display: block; }
-    
-    /* Mentor Grid Styles */
-    .mentor-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
-    .mentor-card {
-      background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; text-align: center;
-      border: 1px solid var(--border); transition: 0.3s;
+    /* --- MENTOR CARDS --- */
+    .mentor-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;
     }
-    .mentor-card:hover { transform: translateY(-5px); background: rgba(255,255,255,0.1); }
+    .mentor-card {
+      background: var(--glass); border: 1px solid var(--glass-border);
+      padding: 20px 10px; border-radius: 20px; text-align: center;
+      transition: 0.3s; position: relative; overflow: hidden;
+    }
+    .mentor-card:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: 0 10px 20px rgba(99, 102, 241, 0.15); }
     
     .mentor-pic {
-      width: 90px; height: 90px; border-radius: 50%; object-fit: cover;
-      border: 3px solid var(--accent); margin-bottom: 10px;
-      background: rgba(255,255,255,0.1);
+      width: 80px; height: 80px; border-radius: 50%; margin-bottom: 10px; object-fit: cover;
+      border: 3px solid var(--accent); padding: 2px;
     }
+    .mentor-name { font-weight: 700; font-size: 1rem; margin-bottom: 2px; }
+    .mentor-role { font-size: 0.75rem; opacity: 0.8; }
 
-    /* Resume Section Styles */
-    .resume-item {
-      padding-left: 20px; border-left: 3px solid var(--primary); margin-bottom: 20px;
-    }
-    .resume-item h4 { font-size: 1.1rem; }
-    .date { font-size: 0.85rem; font-weight: bold; color: var(--accent); }
-    
-    .skills-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-    .tag {
-      background: var(--primary); color: white; padding: 5px 12px; 
-      border-radius: 20px; font-size: 0.85rem;
-    }
-
-    /* Projects Grid */
-    .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    /* --- PROJECTS --- */
     .project-card {
-      background: rgba(255,255,255,0.05); border-radius: 12px; padding: 20px;
-      border: 1px solid var(--border); transition: 0.3s;
+      background: var(--glass); border: 1px solid var(--glass-border);
+      padding: 25px; border-radius: 20px; margin-bottom: 15px;
+      transition: 0.3s; position: relative;
     }
-    .project-card:hover { transform: scale(1.02); background: rgba(255,255,255,0.1); }
+    .project-card:hover {
+      transform: scale(1.02); background: linear-gradient(145deg, rgba(99,102,241,0.1), rgba(0,0,0,0));
+      border-color: var(--primary);
+    }
+    .project-header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+    .project-icon { 
+      width: 40px; height: 40px; background: var(--gradient); color: white;
+      border-radius: 10px; display: flex; align-items: center; justify-content: center;
+    }
 
-    /* Buttons */
-    .btn {
-      display: inline-block; text-decoration: none; background: var(--text); color: var(--bg);
-      padding: 12px 25px; border-radius: 30px; font-weight: bold; margin-top: 10px; margin-right: 10px;
+    /* --- CERTIFICATIONS (New Awesome Design) --- */
+    .cert-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+    
+    .cert-item {
+      display: flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border);
+      padding: 10px 15px; border-radius: 12px; font-size: 0.9rem;
       transition: 0.3s;
     }
-    .btn:hover { opacity: 0.8; transform: translateY(-2px); }
+    .cert-item:hover { background: rgba(255,255,255,0.1); }
 
-    .toggle-btn {
-      position: absolute; top: 20px; right: 20px;
-      background: rgba(255,255,255,0.2); color: white;
-      width: 45px; height: 45px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer; backdrop-filter: blur(5px); z-index: 100;
+    /* Highlighted NPTEL Cert */
+    .cert-item.gold {
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(0,0,0,0));
+      border: 1px solid rgba(251, 191, 36, 0.4);
+      color: #fbbf24;
     }
+    .cert-item.gold i { color: #fbbf24; }
 
-    footer { text-align: center; padding: 40px 20px; opacity: 0.7; font-size: 0.9rem; }
-    ul { padding-left: 20px; margin-top: 5px; }
-    li { margin-bottom: 5px; }
+    /* --- TIMELINE (Resume) --- */
+    .timeline-item {
+      position: relative; padding-left: 25px; margin-bottom: 25px; border-left: 2px solid var(--glass-border);
+    }
+    .timeline-item::before {
+      content: ''; position: absolute; left: -6px; top: 5px;
+      width: 10px; height: 10px; background: var(--primary); border-radius: 50%;
+      box-shadow: 0 0 10px var(--primary);
+    }
+    .timeline-date { font-size: 0.8rem; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
 
-    @keyframes floatUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    /* --- BUTTONS --- */
+    .btn-group { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 30px; }
+    .btn {
+      text-decoration: none; padding: 12px 30px; border-radius: 30px;
+      font-weight: 600; transition: 0.3s; display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-primary {
+      background: white; color: var(--primary);
+    }
+    .btn-outline {
+      border: 2px solid white; color: white;
+    }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+
+    /* --- FOOTER --- */
+    footer { text-align: center; padding: 40px; opacity: 0.6; font-size: 0.85rem; border-top: 1px solid var(--glass-border); margin-top: 40px; }
+
+    /* --- THEME TOGGLE --- */
+    .theme-toggle {
+      position: absolute; top: 25px; right: 25px;
+      background: rgba(255,255,255,0.2); width: 40px; height: 40px;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; backdrop-filter: blur(5px); z-index: 50; transition: 0.3s;
+    }
+    .theme-toggle:active { transform: scale(0.9); }
+
   </style>
 </head>
 <body>
 
-<!-- Background Animation -->
-<div class="blob"></div>
-<div class="blob"></div>
+<!-- Background Orbs -->
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
 
 <header>
-  <div class="toggle-btn" onclick="toggleTheme()"><i class="fas fa-adjust"></i></div>
-  <div class="header-content">
-    <h1 style="font-size: 2.5rem;">Nidhish J</h1>
-    <p style="font-size: 1.1rem; opacity: 0.95;">BE CSE | Innovator | Developer</p>
-    <p style="font-size: 0.9rem; opacity: 0.8;">Dhanalakshmi Srinivasan College of Engineering, Coimbatore</p>
-    
-    <!-- Contact Info -->
-    <p style="margin-top: 15px; font-size: 0.9rem; background: rgba(0,0,0,0.2); display: inline-block; padding: 5px 15px; border-radius: 20px;">
-      <i class="fas fa-envelope"></i> nidhishj100@gmail.com <br> 
-      <i class="fas fa-phone"></i> +91 6282350214
-    </p>
+  <div class="theme-toggle" onclick="toggleTheme()"><i class="fas fa-adjust"></i></div>
+  
+  <h1 style="font-size: 2.8rem; letter-spacing: -1px; margin-bottom: 5px;">Nidhish J</h1>
+  <p style="font-size: 1.2rem; opacity: 0.95; font-weight: 300;">Innovator | Developer | Problem Solver</p>
+  <p style="font-size: 0.9rem; opacity: 0.8; margin-top: 5px;">Dhanalakshmi Srinivasan College of Engineering, Coimbatore</p>
+  
+  <div class="contact-badge">
+    <i class="fas fa-envelope"></i> nidhishj100@gmail.com &nbsp;|&nbsp; <i class="fas fa-phone"></i> +91 6282350214
+  </div>
+  
+  <div class="btn-group">
+    <a href="mailto:nidhishj100@gmail.com" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Hire Me</a>
+    <a href="https://linkedin.com/in/nidhishj100" class="btn btn-outline"><i class="fab fa-linkedin"></i> LinkedIn</a>
   </div>
 </header>
 
-<div style="text-align: center;">
-  <!-- Main Profile Picture -->
-  <img src="me.jpg" onerror="this.src='https://via.placeholder.com/150'" class="profile-pic" alt="Nidhish Profile">
+<div class="profile-container">
+  <!-- Ensure your photo is named 'me.jpg' in GitHub -->
+  <img src="me.jpg" onerror="this.src='https://via.placeholder.com/170'" class="profile-pic" alt="Nidhish">
+  <div class="status-dot"></div>
 </div>
 
 <div class="container">
-  
-  <section>
-    <h2><i class="fas fa-user-tie"></i> Professional Objective</h2>
-    <p>To contribute to innovative, technology-driven projects by applying strong skills in programming, problem-solving, and modern computing technologies, while continuously expanding my expertise and delivering value that supports both organizational success and personal professional growth.</p>
+
+  <!-- OBJECTIVE -->
+  <section style="animation-delay: 0.1s;">
+    <h2 class="section-title"><i class="fas fa-bullseye"></i> Objective</h2>
+    <div style="background: var(--glass); padding: 25px; border-radius: 20px; border: 1px solid var(--glass-border); line-height: 1.6;">
+      To contribute to innovative, technology-driven projects by applying strong skills in programming, problem-solving, and modern computing technologies, while continuously expanding my expertise and delivering value that supports both organizational success and personal professional growth.
+    </div>
   </section>
 
-  <section>
-    <h2><i class="fas fa-chalkboard-teacher"></i> My Mentors</h2>
+  <!-- MENTORS -->
+  <section style="animation-delay: 0.2s;">
+    <h2 class="section-title"><i class="fas fa-chalkboard-user"></i> My Mentors</h2>
     <div class="mentor-grid">
-      
-      <!-- Mentor 1: Rajesh -->
+      <!-- Mentor 1 -->
       <div class="mentor-card">
-        <img src="rajesh.jpg" onerror="this.src='https://via.placeholder.com/90?text=Rajesh'" class="mentor-pic" alt="Dr. B. Rajesh Kumar">
-        <h4>Dr. B. Rajesh Kumar</h4>
-        <span class="subtitle">HOD CSE</span>
-        <p>Guided my academic path and technical foundation.</p>
+        <img src="rajesh.jpg" onerror="this.src='https://via.placeholder.com/80?text=Rajesh'" class="mentor-pic" alt="Dr. Rajesh">
+        <div class="mentor-name">Dr. B. Rajesh Kumar</div>
+        <div class="mentor-role">HOD CSE</div>
       </div>
-
-      <!-- Mentor 2: Sruthy -->
+      <!-- Mentor 2 -->
       <div class="mentor-card">
-        <img src="sruthy.jpg" onerror="this.src='https://via.placeholder.com/90?text=Sruthy'" class="mentor-pic" alt="Mrs. Sruthy KV">
-        <h4>Mrs. Sruthy KV</h4>
-        <span class="subtitle">Asst. Prof CSE</span>
-        <p>Support in core engineering concepts.</p>
+        <img src="sruthy.jpg" onerror="this.src='https://via.placeholder.com/80?text=Sruthy'" class="mentor-pic" alt="Mrs. Sruthy">
+        <div class="mentor-name">Mrs. Sruthy KV</div>
+        <div class="mentor-role">Asst. Prof CSE</div>
       </div>
-
-      <!-- Mentor 3: Monica -->
+      <!-- Mentor 3 -->
       <div class="mentor-card">
-        <img src="monica.jpg" onerror="this.src='https://via.placeholder.com/90?text=Monica'" class="mentor-pic" alt="Mrs. Monica Murthy">
-        <h4>Mrs. Monica Murthy</h4>
-        <span class="subtitle">NLP Trainer & Psychology Coach</span>
-        <p>Mentorship in soft skills and mindset.</p>
+        <img src="monica.jpg" onerror="this.src='https://via.placeholder.com/80?text=Monica'" class="mentor-pic" alt="Mrs. Monica">
+        <div class="mentor-name">Mrs. Monica Murthy</div>
+        <div class="mentor-role">NLP Trainer & Psychology</div>
       </div>
-
     </div>
   </section>
 
-  <section>
-    <h2><i class="fas fa-briefcase"></i> Experience & Internships</h2>
+  <!-- EDUCATION & EXPERIENCE ROW -->
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
     
-    <div class="resume-item">
-      <h4>AI with Robotics Intern</h4>
-      <span class="subtitle">ROBOMATIIC (Div of CAAD Technologies)</span>
-      <ul>
-        <li>Integrated AI with robotics systems.</li>
-        <li>Hands-on with Linux, Google Colab, and Arduino.</li>
+    <!-- Experience -->
+    <section style="animation-delay: 0.3s; margin-bottom: 0;">
+      <h2 class="section-title"><i class="fas fa-briefcase"></i> Experience</h2>
+      
+      <div class="timeline-item">
+        <div class="timeline-date">Internship</div>
+        <h3 style="font-size: 1.1rem;">AI with Robotics</h3>
+        <p style="font-size: 0.9rem; opacity: 0.8;">ROBOMATIIC (Div of CAAD Technologies)</p>
+        <p style="font-size: 0.9rem; margin-top: 5px;">Linux, Google Colab, and Arduino integration.</p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">Internship</div>
+        <h3 style="font-size: 1.1rem;">IoT Developer</h3>
+        <p style="font-size: 0.9rem; opacity: 0.8;">Mindful AI Pvt. Ltd.</p>
+        <p style="font-size: 0.9rem; margin-top: 5px;">Smart Energy Meters & Real-time monitoring.</p>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section style="animation-delay: 0.4s; margin-bottom: 0;">
+      <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Education</h2>
+      
+      <div class="timeline-item">
+        <div class="timeline-date">2024 – 2028</div>
+        <h3 style="font-size: 1.1rem;">B.E. Computer Science</h3>
+        <p style="font-size: 0.9rem; opacity: 0.8;">Dhanalakshmi Srinivasan College of Engineering</p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">Completed 2024</div>
+        <h3 style="font-size: 1.1rem;">Higher Secondary</h3>
+        <p style="font-size: 0.9rem; opacity: 0.8;">Bhavan's Vidya Mandir, Chithali</p>
+      </div>
+    </section>
+
+  </div> <!-- End Grid -->
+
+  <br><br>
+
+  <!-- CERTIFICATIONS -->
+  <section style="animation-delay: 0.5s;">
+    <h2 class="section-title"><i class="fas fa-certificate"></i> Certifications</h2>
+    <div class="cert-grid">
+      <!-- Special Gold Cert -->
+      <div class="cert-item gold">
+        <i class="fas fa-star"></i>
+        <div><strong>NPTEL Cloud Computing</strong> <br> <span style="font-size: 0.8rem; opacity: 0.8;">IIT Kharagpur / MOE India</span></div>
+      </div>
+      
+      <div class="cert-item"><i class="fas fa-check-circle" style="color:var(--accent)"></i> Infosys Data Science</div>
+      <div class="cert-item"><i class="fas fa-check-circle" style="color:var(--accent)"></i> Google Cloud Security</div>
+      <div class="cert-item"><i class="fas fa-check-circle" style="color:var(--accent)"></i> TCS iON Communication</div>
+      <div class="cert-item"><i class="fas fa-check-circle" style="color:var(--accent)"></i> Coursera Python</div>
+      <div class="cert-item"><i class="fas fa-check-circle" style="color:var(--accent)"></i> Java (LearnQuest)</div>
+      <div class="cert-item"><i class="fas fa-check-circle" style="color:var(--accent)"></i> AI Image Processing</div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section style="animation-delay: 0.6s;">
+    <h2 class="section-title"><i class="fas fa-code-branch"></i> Awesome Projects</h2>
+    
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-icon"><i class="fas fa-tree"></i></div>
+        <div>
+          <h3 style="font-size: 1.2rem;">Deforestation Detection</h3>
+          <span style="font-size: 0.8rem; color: var(--primary);">Google Earth Engine (GEE)</span>
+        </div>
+      </div>
+      <p style="font-size: 0.95rem; opacity: 0.9;">
+        Using satellite data and time-series NDVI analysis to detect large-scale forest changes automatically in real-time.
+      </p>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-icon"><i class="fas fa-bolt"></i></div>
+        <div>
+          <h3 style="font-size: 1.2rem;">Smart Energy Meter</h3>
+          <span style="font-size: 0.8rem; color: var(--primary);">IoT & Automation</span>
+        </div>
+      </div>
+      <p style="font-size: 0.95rem; opacity: 0.9;">
+        A smart system for real-time power monitoring, automated billing generation, and tamper alerts using cloud dashboards.
+      </p>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-icon"><i class="fas fa-drone"></i></div>
+        <div>
+          <h3 style="font-size: 1.2rem;">Life Lens</h3>
+          <span style="font-size: 0.8rem; color: var(--primary);">Drone Technology</span>
+        </div>
+      </div>
+      <p style="font-size: 0.95rem; opacity: 0.9;">
+        Drone-powered real-time road hazard detection & emergency response system for safer cities.
+      </p>
+    </div>
+
+  </section>
+
+  <!-- ACHIEVEMENTS -->
+  <section style="animation-delay: 0.7s;">
+    <h2 class="section-title"><i class="fas fa-trophy"></i> Awards & Achievements</h2>
+    <div style="background: var(--glass); padding: 25px; border-radius: 20px; border: 1px solid var(--glass-border);">
+      <ul style="list-style: none; padding: 0;">
+        <li style="margin-bottom: 15px; display: flex; gap: 10px;">
+          <i class="fas fa-medal" style="color: #fbbf24; margin-top: 3px;"></i>
+          <span><strong>Rajya Puraskar Award:</strong> Honored by the Governor of Kerala (Scouts & Guides).</span>
+        </li>
+        <li style="margin-bottom: 15px; display: flex; gap: 10px;">
+          <i class="fas fa-award" style="color: var(--accent); margin-top: 3px;"></i>
+          <span><strong>Paper Presentation:</strong> "Detecting Deforestation using GEE" at National Conference.</span>
+        </li>
+        <li style="margin-bottom: 15px; display: flex; gap: 10px;">
+          <i class="fas fa-award" style="color: var(--accent); margin-top: 3px;"></i>
+          <span><strong>Sri Pranlal Award:</strong> For Harmonious Behaviour (Bharatiya Vidya Bhavan, Delhi).</span>
+        </li>
+        <li style="margin-bottom: 15px; display: flex; gap: 10px;">
+          <i class="fas fa-laptop-code" style="color: var(--accent); margin-top: 3px;"></i>
+          <span><strong>Hackathon 2 (2025):</strong> Active Participant at DSCE, Coimbatore.</span>
+        </li>
       </ul>
     </div>
-
-    <div class="resume-item">
-      <h4>IoT Intern</h4>
-      <span class="subtitle">Mindful AI Pvt. Ltd.</span>
-      <ul>
-        <li>Worked on IoT-based Smart Energy Meters.</li>
-        <li>Implemented real-time energy monitoring and sensor data collection.</li>
-      </ul>
-    </div>
-  </section>
-
-  <section>
-    <h2><i class="fas fa-graduation-cap"></i> Education</h2>
-    <div class="resume-item">
-      <h4>B.E. Computer Science and Engineering</h4>
-      <p>Dhanalakshmi Srinivasan College of Engineering, Coimbatore</p>
-      <span class="date">2024 – 2028</span>
-    </div>
-    <div class="resume-item">
-      <h4>Higher Secondary</h4>
-      <p>Bhavan's Vidya Mandir, Chithali, Palakkad</p>
-      <span class="date">Completed 2024</span>
-    </div>
-  </section>
-
-  <section>
-    <h2><i class="fas fa-trophy"></i> Achievements & Certifications</h2>
-    
-    <h3>Awards</h3>
-    <ul style="margin-bottom: 20px;">
-      <li><strong>Hackathon 2 (2025):</strong> Participant at DSCE, Coimbatore.</li>
-      <li><strong>Paper Presentation:</strong> "Detecting Deforestation using GEE" at National Conference, DSCE.</li>
-      <li><strong>True Blue Award:</strong> For Sincerity (Bhavan's Vidya Mandir).</li>
-      <li><strong>Pinnacle Award:</strong> Best Organiser (Bhavan's Vidya Mandir).</li>
-      <li><strong>Rajya Puraskar Award:</strong> Awarded by Governor of Kerala (Scouts & Guides).</li>
-      <li><strong>Sri Pranlal Award:</strong> For Harmonious Behaviour (Bharatiya Vidya Bhavan, Delhi).</li>
-    </ul>
-
-    <h3>Certifications</h3>
-    <div class="skills-container">
-      <span class="tag">TCS iON Communication</span>
-      <span class="tag">Coursera Python</span>
-      <span class="tag">Google Cloud Security</span>
-      <span class="tag">Infosys Data Science</span>
-      <span class="tag">Java (LearnQuest)</span>
-      <span class="tag">AI Image Processing</span>
-    </div>
-  </section>
-
-  <section>
-    <h2><i class="fas fa-code-branch"></i> Key Projects</h2>
-    <div class="project-grid">
-      
-      <div class="project-card">
-        <h3><i class="fas fa-tree"></i> Deforestation Detection</h3>
-        <span class="subtitle">Google Earth Engine (GEE)</span>
-        <p>Combines time-series NDVI analysis with GEE cloud processing to deliver real-time, large-scale forest change detection and automated monitoring.</p>
-      </div>
-
-      <div class="project-card">
-        <h3><i class="fas fa-bolt"></i> Smart Energy Meter</h3>
-        <span class="subtitle">IoT & Sensors</span>
-        <p>Real-time power monitoring, automated billing, and tamper alerts using microcontrollers and IoT dashboards.</p>
-      </div>
-
-      <div class="project-card">
-        <h3><i class="fas fa-drone"></i> Life Lens</h3>
-        <span class="subtitle">Drone Tech</span>
-        <p>Drone-Powered Real-Time Road Hazard detection & Emergency Response System.</p>
-      </div>
-
-    </div>
-  </section>
-
-  <section style="text-align: center;">
-    <h2><i class="fas fa-address-card"></i> Contact Me</h2>
-    <p>Palakkad-678702, Kerala, India</p>
-    <br>
-    <a href="mailto:nidhishj100@gmail.com" class="btn"><i class="fas fa-envelope"></i> Email</a>
-    <a href="https://linkedin.com/in/nidhishj100" class="btn"><i class="fab fa-linkedin"></i> LinkedIn</a>
-    <a href="tel:+916282350214" class="btn"><i class="fas fa-phone"></i> Call</a>
   </section>
 
 </div>
 
 <footer>
-  <p>© 2025 Nidhish J — Portfolio</p>
+  <p>© 2025 Nidhish J — Designed with <i class="fas fa-heart" style="color: #ef4444;"></i></p>
 </footer>
 
 <script>
