@@ -77,14 +77,20 @@
     
     .subtitle { font-size: 0.9rem; opacity: 0.8; margin-bottom: 10px; display: block; }
     
-    /* Mentor Grid */
+    /* Mentor Grid Styles */
     .mentor-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
     .mentor-card {
-      background: rgba(255,255,255,0.05); padding: 15px; border-radius: 15px; text-align: center;
+      background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; text-align: center;
       border: 1px solid var(--border); transition: 0.3s;
     }
     .mentor-card:hover { transform: translateY(-5px); background: rgba(255,255,255,0.1); }
-    .mentor-icon { font-size: 2rem; color: var(--accent); margin-bottom: 10px; }
+    
+    /* NEW: Styles for Mentor Images */
+    .mentor-pic {
+      width: 90px; height: 90px; border-radius: 50%; object-fit: cover;
+      border: 3px solid var(--accent); margin-bottom: 10px;
+      background: rgba(255,255,255,0.1);
+    }
 
     /* Resume Section Styles */
     .resume-item {
@@ -145,8 +151,8 @@
 </header>
 
 <div style="text-align: center;">
-  <!-- IMPORTANT: Rename your uploaded image to 'profile.jpg' in GitHub -->
-  <img src="profile.jpg" onerror="this.src='https://via.placeholder.com/150'" class="profile-pic" alt="Nidhish Profile">
+  <!-- Your main profile picture -->
+  <img src="me.jpg" onerror="this.src='https://via.placeholder.com/150'" class="profile-pic" alt="Nidhish Profile">
 </div>
 
 <div class="container">
@@ -159,24 +165,31 @@
   <section>
     <h2><i class="fas fa-chalkboard-teacher"></i> My Mentors</h2>
     <div class="mentor-grid">
+      
+      <!-- Mentor 1: Rajesh -->
       <div class="mentor-card">
-        <div class="mentor-icon"><i class="fas fa-user-graduate"></i></div>
+        <img src="rajesh.jpg" onerror="this.src='https://via.placeholder.com/90?text=Rajesh'" class="mentor-pic" alt="Dr. B. Rajesh Kumar">
         <h4>Dr. B. Rajesh Kumar</h4>
         <span class="subtitle">HOD CSE</span>
         <p>Guided my academic path and technical foundation.</p>
       </div>
+
+      <!-- Mentor 2: Sruthy -->
       <div class="mentor-card">
-        <div class="mentor-icon"><i class="fas fa-laptop-code"></i></div>
+        <img src="sruthy.jpg" onerror="this.src='https://via.placeholder.com/90?text=Sruthy'" class="mentor-pic" alt="Mrs. Sruthy KV">
         <h4>Mrs. Sruthy KV</h4>
         <span class="subtitle">Asst. Prof CSE</span>
         <p>Support in core engineering concepts.</p>
       </div>
+
+      <!-- Mentor 3: Monica -->
       <div class="mentor-card">
-        <div class="mentor-icon"><i class="fas fa-brain"></i></div>
+        <img src="monica.jpg" onerror="this.src='https://via.placeholder.com/90?text=Monica'" class="mentor-pic" alt="Mrs. Monica Murthy">
         <h4>Mrs. Monica Murthy</h4>
         <span class="subtitle">NLP Trainer & Psychology Coach</span>
         <p>Mentorship in soft skills and mindset.</p>
       </div>
+
     </div>
   </section>
 
@@ -291,4 +304,4 @@
 </body>
 </html>
 
-        
+
