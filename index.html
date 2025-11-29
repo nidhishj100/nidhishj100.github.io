@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nidhish J - Portfolio</title>
 
+  <!-- Google Fonts & Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -18,170 +19,265 @@
       --primary: #6366f1;
       --accent: #8b5cf6;
       --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      --border: rgba(255, 255, 255, 0.1);
     }
 
     [data-theme="light"] {
       --bg: #f8fafc;
       --text: #1e293b;
-      --glass: rgba(255, 255, 255, 0.8);
+      --glass: rgba(255, 255, 255, 0.85);
       --primary: #4f46e5;
       --accent: #d946ef;
       --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+      --border: rgba(0, 0, 0, 0.1);
     }
 
     body { background: var(--bg); color: var(--text); transition: 0.3s ease; overflow-x: hidden; }
 
-    /* Animated Background Blob */
+    /* Animated Background */
     .blob {
       position: fixed; top: -10%; left: -10%; width: 50vw; height: 50vw;
       background: var(--primary); filter: blur(100px); opacity: 0.4; z-index: -1;
       animation: move 10s infinite alternate; border-radius: 50%;
     }
     .blob:nth-child(2) { top: auto; bottom: -10%; left: auto; right: -10%; background: var(--accent); animation-delay: -5s; }
-
     @keyframes move { from { transform: translate(0,0); } to { transform: translate(50px, 50px); } }
 
     /* Header */
     header {
-      padding: 80px 20px 40px; text-align: center;
-      background: linear-gradient(135deg, rgba(99,102,241,0.9), rgba(139,92,246,0.9));
-      color: white; border-radius: 0 0 30px 30px;
+      padding: 100px 20px 60px; text-align: center;
+      background: linear-gradient(135deg, rgba(99,102,241,0.95), rgba(139,92,246,0.95));
+      color: white; border-radius: 0 0 40px 40px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     }
 
     .profile-pic {
-      width: 150px; height: 150px; border-radius: 50%; object-fit: cover;
-      border: 4px solid white; margin-top: -75px;
+      width: 160px; height: 160px; border-radius: 50%; object-fit: cover;
+      border: 5px solid white; margin-top: -80px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-      background: #ddd; /* Placeholder color if image fails */
+      background: #ddd; 
     }
 
-    .container { max-width: 900px; margin: auto; padding: 20px; }
+    .container { max-width: 950px; margin: auto; padding: 20px; }
 
-    /* Cards */
+    /* General Section Styles */
     section {
       background: var(--glass);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      padding: 25px; margin-top: 25px;
+      padding: 30px; margin-top: 30px;
       border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--border);
       box-shadow: var(--shadow);
       animation: floatUp 0.8s ease-out;
     }
 
-    h2 { color: var(--primary); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+    h2 { color: var(--primary); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; border-bottom: 2px solid var(--border); padding-bottom: 10px; }
+    h3 { margin-top: 15px; margin-bottom: 5px; color: var(--text); }
     
+    .subtitle { font-size: 0.9rem; opacity: 0.8; margin-bottom: 10px; display: block; }
+    
+    /* Mentor Grid */
+    .mentor-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+    .mentor-card {
+      background: rgba(255,255,255,0.05); padding: 15px; border-radius: 15px; text-align: center;
+      border: 1px solid var(--border); transition: 0.3s;
+    }
+    .mentor-card:hover { transform: translateY(-5px); background: rgba(255,255,255,0.1); }
+    .mentor-icon { font-size: 2rem; color: var(--accent); margin-bottom: 10px; }
+
+    /* Resume Section Styles */
+    .resume-item {
+      padding-left: 20px; border-left: 3px solid var(--primary); margin-bottom: 20px;
+    }
+    .resume-item h4 { font-size: 1.1rem; }
+    .date { font-size: 0.85rem; font-weight: bold; color: var(--accent); }
+    
+    .skills-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
     .tag {
-      display: inline-block; background: var(--primary); color: white;
-      padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; margin: 3px;
+      background: var(--primary); color: white; padding: 5px 12px; 
+      border-radius: 20px; font-size: 0.85rem;
     }
 
     /* Projects Grid */
-    .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
-    
+    .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
     .project-card {
-      background: rgba(255,255,255,0.05); border-radius: 12px; padding: 15px;
-      border: 1px solid rgba(255,255,255,0.1); transition: 0.3s;
+      background: rgba(255,255,255,0.05); border-radius: 12px; padding: 20px;
+      border: 1px solid var(--border); transition: 0.3s;
     }
-    .project-card:hover { transform: translateY(-5px); background: rgba(255,255,255,0.1); }
-    .project-card h3 { font-size: 1.1rem; margin-bottom: 5px; }
+    .project-card:hover { transform: scale(1.02); background: rgba(255,255,255,0.1); }
 
-    /* Buttons & Footer */
+    /* Buttons */
     .btn {
       display: inline-block; text-decoration: none; background: var(--text); color: var(--bg);
-      padding: 10px 20px; border-radius: 30px; font-weight: bold; margin-top: 10px;
+      padding: 12px 25px; border-radius: 30px; font-weight: bold; margin-top: 10px; margin-right: 10px;
       transition: 0.3s;
     }
-    .btn:hover { opacity: 0.8; transform: scale(1.05); }
+    .btn:hover { opacity: 0.8; transform: translateY(-2px); }
 
     .toggle-btn {
       position: absolute; top: 20px; right: 20px;
       background: rgba(255,255,255,0.2); color: white;
-      width: 40px; height: 40px; border-radius: 50%;
+      width: 45px; height: 45px; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      cursor: pointer; backdrop-filter: blur(5px);
+      cursor: pointer; backdrop-filter: blur(5px); z-index: 100;
     }
 
     footer { text-align: center; padding: 40px 20px; opacity: 0.7; font-size: 0.9rem; }
+    ul { padding-left: 20px; margin-top: 5px; }
+    li { margin-bottom: 5px; }
 
     @keyframes floatUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
   </style>
 </head>
 <body>
 
+<!-- Background Animation -->
 <div class="blob"></div>
 <div class="blob"></div>
 
 <header>
   <div class="toggle-btn" onclick="toggleTheme()"><i class="fas fa-adjust"></i></div>
-  <h1 style="font-size: 2.5rem;">Nidhish J</h1>
-  <p style="opacity: 0.9;">Computer Science Engineer | Developer | Innovator</p>
+  <h1 style="font-size: 2.8rem;">Nidhish J</h1>
+  <p style="font-size: 1.1rem; opacity: 0.95; margin-top: 5px;">BE CSE | Innovator | Developer</p>
+  <p style="font-size: 0.9rem; opacity: 0.8; margin-top: 5px;">Dhanalakshmi Srinivasan College of Engineering, Coimbatore</p>
+  <p style="margin-top: 10px; font-size: 0.9rem;"><i class="fas fa-envelope"></i> nidhishj100@gmail.com | <i class="fas fa-phone"></i> +91 6282350214</p>
 </header>
 
 <div style="text-align: center;">
-  <img src="https://via.placeholder.com/150" class="profile-pic" alt="Nidhish Profile">
+  <!-- IMPORTANT: Rename your uploaded image to 'profile.jpg' in GitHub -->
+  <img src="profile.jpg" onerror="this.src='https://via.placeholder.com/150'" class="profile-pic" alt="Nidhish Profile">
 </div>
 
 <div class="container">
   
   <section>
-    <h2><i class="fas fa-user-astronaut"></i> About Me</h2>
-    <p>I am Nidhish, a passionate BE CSE student focusing on AI, IoT, and Web Development. I build modern, creative applications that solve real-world problems.</p>
-    <div style="margin-top: 15px;">
-      <span class="tag">Hackathon Winner</span>
-      <span class="tag">Innovator</span>
-      <span class="tag">Leader</span>
+    <h2><i class="fas fa-user-tie"></i> Professional Objective</h2>
+    <p>To contribute to innovative, technology-driven projects by applying strong skills in programming, problem-solving, and modern computing technologies, while continuously expanding my expertise and delivering value that supports both organizational success and personal professional growth.</p>
+  </section>
+
+  <section>
+    <h2><i class="fas fa-chalkboard-teacher"></i> My Mentors</h2>
+    <div class="mentor-grid">
+      <div class="mentor-card">
+        <div class="mentor-icon"><i class="fas fa-user-graduate"></i></div>
+        <h4>Dr. B. Rajesh Kumar</h4>
+        <span class="subtitle">HOD CSE</span>
+        <p>Guided my academic path and technical foundation.</p>
+      </div>
+      <div class="mentor-card">
+        <div class="mentor-icon"><i class="fas fa-laptop-code"></i></div>
+        <h4>Mrs. Sruthy KV</h4>
+        <span class="subtitle">Asst. Prof CSE</span>
+        <p>Support in core engineering concepts.</p>
+      </div>
+      <div class="mentor-card">
+        <div class="mentor-icon"><i class="fas fa-brain"></i></div>
+        <h4>Mrs. Monica Murthy</h4>
+        <span class="subtitle">NLP Trainer & Psychology Coach</span>
+        <p>Mentorship in soft skills and mindset.</p>
+      </div>
     </div>
   </section>
 
   <section>
-    <h2><i class="fas fa-code"></i> Skills</h2>
-    <div>
-      <span class="tag">C / Python</span>
-      <span class="tag">JavaScript</span>
-      <span class="tag">Google Earth Engine</span>
-      <span class="tag">IoT & Arduino</span>
-      <span class="tag">AI / ML</span>
-      <span class="tag">Web Dev</span>
+    <h2><i class="fas fa-briefcase"></i> Experience & Internships</h2>
+    
+    <div class="resume-item">
+      <h4>AI with Robotics Intern</h4>
+      <span class="subtitle">ROBOMATIIC (Div of CAAD Technologies)</span>
+      <ul>
+        <li>Integrated AI with robotics systems.</li>
+        <li>Hands-on with Linux, Google Colab, and Arduino.</li>
+      </ul>
+    </div>
+
+    <div class="resume-item">
+      <h4>IoT Intern</h4>
+      <span class="subtitle">Mindful AI Pvt. Ltd.</span>
+      <ul>
+        <li>Worked on IoT-based Smart Energy Meters.</li>
+        <li>Implemented real-time energy monitoring and sensor data collection.</li>
+      </ul>
     </div>
   </section>
 
   <section>
-    <h2><i class="fas fa-laptop-code"></i> Projects</h2>
+    <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+    <div class="resume-item">
+      <h4>B.E. Computer Science and Engineering</h4>
+      <p>Dhanalakshmi Srinivasan College of Engineering, Coimbatore</p>
+      <span class="date">2024 – 2028</span>
+    </div>
+    <div class="resume-item">
+      <h4>Higher Secondary</h4>
+      <p>Bhavan's Vidya Mandir, Chithali, Palakkad</p>
+      <span class="date">Completed 2024</span>
+    </div>
+  </section>
+
+  <section>
+    <h2><i class="fas fa-trophy"></i> Achievements & Certifications</h2>
+    
+    <h3>Awards</h3>
+    <ul style="margin-bottom: 20px;">
+      <li><strong>Hackathon 2 (2025):</strong> Participant at DSCE, Coimbatore.</li>
+      <li><strong>Paper Presentation:</strong> "Detecting Deforestation using GEE" at National Conference, DSCE.</li>
+      <li><strong>True Blue Award:</strong> For Sincerity (Bhavan's Vidya Mandir).</li>
+      <li><strong>Pinnacle Award:</strong> Best Organiser (Bhavan's Vidya Mandir).</li>
+      <li><strong>Rajya Puraskar Award:</strong> Awarded by Governor of Kerala (Scouts & Guides).</li>
+      <li><strong>Sri Pranlal Award:</strong> For Harmonious Behaviour (Bharatiya Vidya Bhavan, Delhi).</li>
+    </ul>
+
+    <h3>Certifications</h3>
+    <div class="skills-container">
+      <span class="tag">TCS iON Communication</span>
+      <span class="tag">Coursera Python</span>
+      <span class="tag">Google Cloud Security</span>
+      <span class="tag">Infosys Data Science</span>
+      <span class="tag">Java (LearnQuest)</span>
+      <span class="tag">AI Image Processing</span>
+    </div>
+  </section>
+
+  <section>
+    <h2><i class="fas fa-code-branch"></i> Key Projects</h2>
     <div class="project-grid">
+      
+      <div class="project-card">
+        <h3><i class="fas fa-tree"></i> Deforestation Detection</h3>
+        <span class="subtitle">Google Earth Engine (GEE)</span>
+        <p>Combines time-series NDVI analysis with GEE cloud processing to deliver real-time, large-scale forest change detection and automated monitoring.</p>
+      </div>
+
       <div class="project-card">
         <h3><i class="fas fa-bolt"></i> Smart Energy Meter</h3>
-        <p>IoT-based real‑time power monitoring with automated billing alerts.</p>
+        <span class="subtitle">IoT & Sensors</span>
+        <p>Real-time power monitoring, automated billing, and tamper alerts using microcontrollers and IoT dashboards.</p>
       </div>
+
       <div class="project-card">
-        <h3><i class="fas fa-vote-yea"></i> Online Voting</h3>
-        <p>Secure, verified, real‑time voting system for college events.</p>
+        <h3><i class="fas fa-drone"></i> Life Lens</h3>
+        <span class="subtitle">Drone Tech</span>
+        <p>Drone-Powered Real-Time Road Hazard detection & Emergency Response System.</p>
       </div>
-      <div class="project-card">
-        <h3><i class="fas fa-brain"></i> Neuromorphic AI</h3>
-        <p>Emotionally adaptive model inspired by human neuroplasticity.</p>
-      </div>
-      <div class="project-card">
-        <h3><i class="fas fa-tree"></i> Deforestation (GEE)</h3>
-        <p>NDVI‑based Western Ghats monitoring using satellite data.</p>
-      </div>
+
     </div>
   </section>
 
   <section style="text-align: center;">
-    <h2><i class="fas fa-paper-plane"></i> Get in Touch</h2>
-    <p>Let's collaborate on something amazing.</p>
+    <h2><i class="fas fa-address-card"></i> Contact Me</h2>
+    <p>Palakkad-678702, Kerala, India</p>
     <br>
-    <a href="mailto:your-email@example.com" class="btn"><i class="fas fa-envelope"></i> Email Me</a>
-    <a href="https://github.com/" class="btn"><i class="fab fa-github"></i> GitHub</a>
-    <a href="https://linkedin.com/" class="btn"><i class="fab fa-linkedin"></i> LinkedIn</a>
+    <a href="mailto:nidhishj100@gmail.com" class="btn"><i class="fas fa-envelope"></i> Email</a>
+    <a href="https://linkedin.com/in/nidhishj100" class="btn"><i class="fab fa-linkedin"></i> LinkedIn</a>
+    <a href="tel:+916282350214" class="btn"><i class="fas fa-phone"></i> Call</a>
   </section>
 
 </div>
 
 <footer>
-  <p>© 2025 Nidhish J — Built with <i class="fas fa-heart" style="color: red;"></i></p>
+  <p>© 2025 Nidhish J — Portfolio</p>
 </footer>
 
 <script>
@@ -193,5 +289,6 @@
 </script>
 
 </body>
-  </html>
-  
+</html>
+
+        
